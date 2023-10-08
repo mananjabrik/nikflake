@@ -108,6 +108,10 @@
 	    git
 		tree
 
+		ripgrep
+    	fzf
+    	fd
+
         home-manager
 
       # game
