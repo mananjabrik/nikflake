@@ -8,6 +8,10 @@ return {
             require("Comment").setup()
         end
     },
+    
+    {
+        "nvim-tree/nvim-tree.lua",
+    },
 
     {
         "ellisonleao/gruvbox.nvim",
