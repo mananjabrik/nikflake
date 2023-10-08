@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./tmux.nix
       ./steam.nix
-      ./git.nix
+      # ./git.nix
     ];
 
   #flakes
@@ -173,5 +173,19 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+  };
+
+  #enable home manager
+  # programs.home-manager.enable = true;
+  
+  #setup git
+  programs.git = {
+    enable = true;
+    # userName = "mananjabrik";
+    # userEmail = "manan.jabrik@gmail.com";
+    # extraConfig = {
+    #   init.defaultBranch = "master";
+    #   pull.rebase = true; 
+    # };
   };
 }
