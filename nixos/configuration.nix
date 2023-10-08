@@ -106,6 +106,8 @@
         tmux
 	      git
 
+        home-manager
+
       # game
         steam
     ];
@@ -173,19 +175,5 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-  };
-
-  #enable home manager
-  # programs.home-manager.enable = true;
-  
-  #setup git
-  programs.git = {
-    enable = true;
-    # userName = "mananjabrik";
-    # userEmail = "manan.jabrik@gmail.com";
-    # extraConfig = {
-    #   init.defaultBranch = "master";
-    #   pull.rebase = true; 
-    # };
   };
 }
