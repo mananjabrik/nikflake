@@ -95,6 +95,7 @@
     packages = with pkgs; [
       # browser
         firefox
+		brave
 
       # social
       	discord
@@ -110,6 +111,9 @@
 
       # game
         steam
+      
+      # compilers
+      gcc
     ];
   };
 

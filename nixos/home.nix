@@ -31,7 +31,11 @@
   home.packages = with pkgs; [
     # lsp
     lua-language-server
-  
+    nodePackages_latest.typescript-language-server
+    gopls
+
+    # compilers
+    gcc
   ];
 
   programs.home-manager.enable = true;
