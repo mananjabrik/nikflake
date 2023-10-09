@@ -45,6 +45,15 @@
     userEmail = "manan.jabrik@gmail.com";
   };
 
+	program.zsh = {
+		enable = true;
+		ohMyZsh = {
+    		enable = true;
+   			plugins = [ "git" "thefuck" ];
+			theme = "robbyrussell";
+  		};
+	};
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }

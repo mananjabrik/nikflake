@@ -3,6 +3,11 @@
     programs.tmux = {
     enable = true;
     clock24 = true;
+	plugins = with pkgs.tmuxPlugins; [
+      catppuccin
+      sensible
+      resurrect
+    ];
     extraConfig = '' # used for less common options, intelligently combines if defined in multiple places.
      run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
      

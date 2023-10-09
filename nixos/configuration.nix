@@ -122,6 +122,8 @@
     ];
   };
 
+  users.defaultUserShell = pkgs.zsh;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -132,6 +134,7 @@
   #  wget
    wget
    fd
+   zsh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -176,10 +179,6 @@
   ];
   hardware.opengl.driSupport = true;
 
-  fonts.packages = with pkgs; [
-    fira-code
-  ];
-
   #nvim setup
   programs.neovim = {
     enable = true;
@@ -187,4 +186,24 @@
     viAlias = true;
     vimAlias = true;
   };
+
+  #zsh setup
+  programs.zsh = {
+	enable=true;
+	histSize = 10000;
+
+	ohMyZsh = {
+   		enable = true;
+    	plugins = [ "git" ];
+    	theme = "robbyrussell";
+  	};
+  };
+
+  fonts.packages = with pkgs; [
+    liberation_ttf
+    font-awesome
+    cantarell-fonts
+    work-sans
+    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+  ];
 }
