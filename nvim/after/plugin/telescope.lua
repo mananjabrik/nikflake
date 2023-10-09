@@ -31,7 +31,8 @@ wk.register({
 		name = "Git",
 		s = { builtin.git_status, "Git Status" },
 		b = { builtin.git_branches, "Git Branches" },
-		c = { builtin.git_bcommit, "Git Commit" }
+		l = { builtin.git_commits, "Git Log Commit" },
+		c = { builtin.git_bcommits, "Git Commits" }
 	}
 })
 
