@@ -8,6 +8,9 @@
   environment,
   ...
 }: {
+  home.username = "mananjabrik";
+  home.homeDirectory = "/home/mananjabrik";
+  
   nixpkgs = {
     overlays = [
     ];
@@ -22,11 +25,6 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
-
-  # copy zshrc to home
-  home.file.".zshrc" = {
-    source = ./zshrc;
-  };
   
   home.packages = with pkgs; [
     # lsp
@@ -38,23 +36,18 @@
     gcc
   ];
 
-  services.mpd.enable = false;
-
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
     userName = "mananjabrik";
     userEmail = "manan.jabrik@gmail.com";
   };
-
-	program.zsh = {
-		enable = true;
-		ohMyZsh = {
-    		enable = true;
-   			plugins = [ "git" "thefuck" ];
-			theme = "robbyrussell";
-  		};
-	};
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";

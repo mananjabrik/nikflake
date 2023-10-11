@@ -116,7 +116,6 @@
       	discord
 
       # worksspace
-        neovim
         vscode-fhs
 				tmux
         alacritty
@@ -212,14 +211,6 @@
     amdvlk
   ];
   hardware.opengl.driSupport = true;
-
-  #nvim setup
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
 
   #zsh setup
   programs.zsh = {
