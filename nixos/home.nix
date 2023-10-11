@@ -38,6 +38,8 @@
     gcc
   ];
 
+  services.mpd.enable = false;
+
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;

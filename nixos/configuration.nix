@@ -13,8 +13,13 @@
       # ./git.nix
     ];
 
-  #flakes
+  # flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # xremap
+  hardware.uinput.enable = true;
+  users.groups.uinput.members = [ "mananjabrik" ];
+  users.groups.input.members = [ "mananjabrik" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -54,6 +59,15 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # # setup ssh 
+  # services.openssh = {
+  #   enable = true;
+  #   settings = {
+  #     PasswordAuthentication = true;
+  #   };
+  # };
+  # networking.firewall.allowedTCPPorts = [ 22 ];
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -92,33 +106,53 @@
     isNormalUser = true;
     description = "mananjabrik";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       # browser
         firefox
-		brave
+				brave
 
       # social
       	discord
 
       # worksspace
         neovim
-        alacritty
         vscode-fhs
-        tmux
-	    git
-		tree
+				tmux
+        alacritty
+				git
+        rio
+				tree
 
-		ripgrep
-    	fzf
-    	fd
+      # interface
+        waybar
+      
+      #build dep  
+        rofi
+        dolphin
+        
+        wayland
+        cmake
+        meson
+        scdoc
+        wayland-protocols
+
+				ripgrep
+				fzf
+				fd
 
         home-manager
+				# lsp
+				lua-language-server
+				nodePackages_latest.typescript-language-server
+				gopls
+        tree-sitter
 
       # game
         steam
       
       # compilers
-      gcc
+				gcc
     ];
   };
 
@@ -133,7 +167,6 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
    wget
-   fd
    zsh
   ];
 
@@ -149,9 +182,10 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  # services.openssh.settings.PasswordAuthentication = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -198,6 +232,25 @@
     	theme = "robbyrussell";
   	};
   };
+  # hyprland setup
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ 
+    # pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    })
+  ];
 
   fonts.packages = with pkgs; [
     liberation_ttf
@@ -206,4 +259,13 @@
     work-sans
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  
+
 }
