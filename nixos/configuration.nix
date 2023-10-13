@@ -125,8 +125,13 @@
 
       # interface
         waybar
+        rofi-wayland
+        rofi mako rofimoji
+        playerctl
+        pamixer
+
       
-      #build dep  
+      # build dep  
         rofi
         dolphin
         
