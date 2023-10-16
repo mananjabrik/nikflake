@@ -29,7 +29,6 @@
   home.packages = with pkgs; [
     slack
     spotify
-    fzf
   ];
 
   programs.home-manager.enable = true;

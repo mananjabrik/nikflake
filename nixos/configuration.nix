@@ -69,8 +69,8 @@
   # networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.deepin.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -120,27 +120,9 @@
 				tmux
         alacritty
 				git
-        rio
 				tree
 
-      # interface
-        waybar
-        rofi-wayland
-        rofi mako rofimoji
-        playerctl
-        pamixer
-
-      
       # build dep  
-        rofi
-        dolphin
-        
-        wayland
-        cmake
-        meson
-        scdoc
-        wayland-protocols
-
 				ripgrep
 				fzf
 				fd
@@ -228,26 +210,7 @@
     	theme = "robbyrussell";
   	};
   };
-  # hyprland setup
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
   
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ 
-    # pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-  ];
-
-  nixpkgs.overlays = [
-    (self: super: {
-      waybar = super.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      });
-    })
-  ];
-
   fonts.packages = with pkgs; [
     liberation_ttf
     font-awesome
@@ -261,7 +224,5 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-
-  
 
 }
