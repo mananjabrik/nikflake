@@ -69,8 +69,10 @@
   # networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.deepin.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.deepin.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -91,7 +93,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    # jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -121,6 +123,8 @@
         alacritty
 				git
 				tree
+        rofi
+        nodePackages_latest.pnpm
 
       # build dep  
 				ripgrep
@@ -154,6 +158,8 @@
   #  wget
    wget
    zsh
+   unzip
+   nodejs_20
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -198,6 +204,11 @@
     amdvlk
   ];
   hardware.opengl.driSupport = true;
+  
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   #zsh setup
   programs.zsh = {
@@ -211,6 +222,12 @@
   	};
   };
   
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ 
+    # pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-hyprland
+  ];
+
   fonts.packages = with pkgs; [
     liberation_ttf
     font-awesome

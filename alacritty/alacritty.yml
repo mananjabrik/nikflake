@@ -451,8 +451,8 @@ blink_interval: 750
 
 # Shell
 #
-shell:
-  program: nvim
+# shell:
+  # program: nvim
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
